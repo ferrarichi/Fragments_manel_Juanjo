@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -24,6 +25,8 @@ public class Fragment3 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private TextView cont;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,6 +71,9 @@ public class Fragment3 extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_fragment3, container, false);
 
+        cont = (TextView) v.findViewById(R.id.contador);
+
+        cont.setText("Contador: "+ MainActivity.contador);
         return v;
     }
 

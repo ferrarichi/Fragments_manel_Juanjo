@@ -1,12 +1,20 @@
 package mviel.fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends Activity implements Fragment2.OnFragmentInteractionListener2,Fragment3.OnFragmentInteractionListener3 {
+public class MainActivity extends Activity implements Fragment2.Comunicador, Fragment2.OnFragmentInteractionListener2,Fragment3.OnFragmentInteractionListener3 {
+
+
+    public static int contador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +62,32 @@ public class MainActivity extends Activity implements Fragment2.OnFragmentIntera
     @Override
     public void onFragmentInteraction3(Uri uri) {
 
+    }
+
+    public void onBackPressed(){
+
+         FragmentManager fm;
+         FragmentTransaction ft;
+
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+
+        if(estaFragment3EnActivity()==true){
+
+            ft.remove(getFragmentManager().findFragmentById(R.id.canto_inferior_dret));
+            ft.commit();
+            Toast.makeText(getApplicationContext(),"Se ha eliminado el fragment 3",Toast.LENGTH_LONG).show();
+
+        }else{
+
+            ft.remove(getFragmentManager().findFragmentById(R.id.canto_superior_dret));
+            ft.commit();
+            Toast.makeText(getApplicationContext(), "Se ha eliminado el fragment 2", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public void comunica(int cont){
+        contador = cont;
     }
 }

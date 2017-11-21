@@ -30,6 +30,10 @@ public class Fragment2 extends Fragment {
     private FragmentManager fm;
     private FragmentTransaction ft;
 
+    private int contador;
+    private Comunicador c;
+    FrameLayout fl;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -75,15 +79,23 @@ public class Fragment2 extends Fragment {
 
         FrameLayout fl = (FrameLayout) v.findViewById(R.id.FrameLayout1);
 
+        contador = MainActivity.contador;
+
         fl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
+
+                contador++;
                 //si
                 if (!mListener.estaFragment3EnActivity()) {
                     Toast.makeText(getContext(), "Mostrant Fragment3", Toast.LENGTH_SHORT).show();
                     ft.add(R.id.canto_inferior_dret, Fragment3.newInstance("", ""));
+
+                    c = (Comunicador) getActivity();
+
+                    c.comunica(contador);
 
 
                 }else{
@@ -138,4 +150,8 @@ public class Fragment2 extends Fragment {
 
 
 
+    //Declaro una interfaz comunicador que debera implementar el metodo comunicat
+    public interface Comunicador{
+        void comunica(int cont);
+    }
 }
